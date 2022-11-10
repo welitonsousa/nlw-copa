@@ -10,20 +10,20 @@ export async function poolRoutes(fastify: FastifyInstance) {
     return { count }
   })
 
-  fastify.post('/pools', async (request) => {
-    const body = z.object({ title: z.string() })
+  fastify.post('/pools', async (request, reply) => {
+    const body = z.object({ title: z.string().trim().min(1) })
     let title
     try {
       const data = body.parse(request.body)
       title = data.title
     } catch (error) {
-      return JSON.parse((error as any).message)
+      return reply.status(400).send( JSON.parse((error as any).message))
     }
     const createCode = new ShortUniqueId({ length: 6 })
     const code = String(createCode()).toLocaleUpperCase()
     try {
       await request.jwtVerify()
-      await prisma.pool.create({
+      const pool = await prisma.pool.create({
         data: {
           code, title, ownerId: request.user.sub, participants: {
             create: {
@@ -32,12 +32,14 @@ export async function poolRoutes(fastify: FastifyInstance) {
           }
         }
       })
+      return { pool }
     } catch (err) {
-      await prisma.pool.create({
+      const pool = await prisma.pool.create({
         data: { code, title }
       })
+      return { pool }
     }
-    return { title: title, code }
+    return reply.status(500).send()
   })
 
   fastify.post('/pools/:code/join', async (request, reply) => {
@@ -66,7 +68,6 @@ export async function poolRoutes(fastify: FastifyInstance) {
         userId: request.user.sub,
       }
     })
-    request.jwtVerify({})
   })
 
   fastify.get('/pools', async (request) => {

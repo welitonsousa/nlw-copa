@@ -24,8 +24,9 @@ class CreatePollPage extends GetView<CreatePollController> {
             style: context.textTheme.headline6,
           ),
           const SizedBox(height: 25),
-          const AppInput(
+          AppInput(
             label: "Qual nome do seu bolão?",
+            controller: controller.title,
           ),
           const SizedBox(height: 8),
           AppButton(
