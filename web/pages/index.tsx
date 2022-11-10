@@ -11,7 +11,7 @@ const notify = (title: String, type: TypeOptions) => toast(title, {type});
 
 export default function Home(props: Props) {
 
-  const [poolsCount, setPoolCount] = useState(0)
+  const [poolsCount, setPoolCount] = useState(props.poolsCount)
   const [poolTitle, setPoolTitle] = useState('')
 
   const registerPool = async (event: FormEvent) => {
@@ -80,6 +80,8 @@ export default function Home(props: Props) {
 }
 
 // getServerSideProps
+// getStaticProps
+
 export const getStaticProps = async () => {
   const res = await Promise.all([repo.poolsCount(), repo.usersCount(), repo.guessesCount()])
   return {

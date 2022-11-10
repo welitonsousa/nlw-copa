@@ -23,6 +23,7 @@
     "@fastify/cookie": "^8.3.0",
     "@fastify/cors": "^8.1.1",
     "@fastify/jwt": "^6.3.2",
+    "@fastify/swagger": "^8.1.0",
     "@prisma/client": "^4.5.0",
     "fastify": "^4.9.2",
     "short-unique-id": "^4.4.4",

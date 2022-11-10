@@ -10,7 +10,6 @@ class SignInController extends GetxController {
 
   Future<void> signIn() async {
     final res = await _repository.signIn();
-    print(res);
     if (res != null) Get.offAndToNamed(NamesRouters.HOME);
   }
 }

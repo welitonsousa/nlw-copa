@@ -5,7 +5,7 @@ import './sign_in_controller.dart';
 class SignInBindings implements Bindings {
   @override
   void dependencies() {
-    Get.put(AuthRepository(), permanent: true);
+    Get.put(AuthRepository());
     Get.put(SignInController(repository: Get.find()));
   }
 }

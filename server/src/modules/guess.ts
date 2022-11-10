@@ -20,7 +20,7 @@ export async function guessRoutes(fastify: FastifyInstance) {
     })
 
     const params = request.params as Params
-    const body = await validation.parse(request.body)
+    const {firstTeamPoints, secondTeamPoints} = await validation.parse(request.body)
     const pool = await prisma.pool.findUnique({ where: { id: params.poolId } })
     if (!pool) return reply.status(404).send({ message: 'pool not found' })
 
@@ -48,19 +48,17 @@ export async function guessRoutes(fastify: FastifyInstance) {
       }
     })
     if (guess) return reply.status(400).send({ message: 'You cannot send guesses after the game date' })
-    if (game.date <= new Date()) return reply.status(400).send({ message: '' })
+    if (game.date < new Date()) return reply.status(400).send({ message: '' })
 
 
     await prisma.guess.create({
       data: {
-        firstTeamPoints: body.firstTeamPoints,
-        secondTeamPoints: body.secondTeamPoints,
-        participantId: request.user.sub,
-        gameId: params.gameId,
-
+        participantId: participant.id,
+        gameId: game.id,
+        firstTeamPoints,
+        secondTeamPoints,
       }
     })
-
   })
 
 
