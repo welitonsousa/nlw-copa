@@ -1,7 +1,7 @@
 import 'package:get/get_connect.dart';
 import 'package:get/instance_manager.dart';
 
-class AppBiding extends Bindings {
+class AppBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(GetHttpClient(

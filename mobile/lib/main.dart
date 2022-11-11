@@ -2,11 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:mobile/core/bidings/app_binding.dart';
-
 import 'package:mobile/core/router/names.dart';
 import 'package:mobile/core/router/pages.dart';
 import 'package:mobile/core/theme/app_theme.dart';
+import 'core/bindings/app_binding.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: logged ? NamesRouters.HOME : NamesRouters.SIGN_IN,
       getPages: Pages().list,
       enableLog: false,
-      initialBinding: AppBiding(),
+      initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
     );
   }

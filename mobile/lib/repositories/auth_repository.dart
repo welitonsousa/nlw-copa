@@ -29,7 +29,6 @@ class AuthRepository {
     final token = _storage.read('token');
     _http.addAuthenticator<T?>((request) async {
       request.headers['Authorization'] = "Bearer $token";
-
       return request;
     });
   }

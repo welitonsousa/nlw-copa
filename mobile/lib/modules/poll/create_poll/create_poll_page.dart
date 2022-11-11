@@ -29,10 +29,11 @@ class CreatePollPage extends GetView<CreatePollController> {
             controller: controller.title,
           ),
           const SizedBox(height: 8),
-          AppButton(
-            title: "criar meu bolão",
-            onTap: controller.createPoll,
-          ),
+          Obx((() => AppButton(
+                title: "criar meu bolão",
+                loading: controller.loading,
+                onTap: controller.createPoll,
+              ))),
           const SizedBox(height: 20),
           Text(
             "Após criar seu bolão, você receberá um\ncódigo único que poderá usar para convidar\noutras pessoas.",

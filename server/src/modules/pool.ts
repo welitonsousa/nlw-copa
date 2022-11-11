@@ -5,24 +5,36 @@ import ShortUniqueId from "short-unique-id"
 
 
 export async function poolRoutes(fastify: FastifyInstance) {
+  
   fastify.get('/pools/count', async () => {
     const count = await prisma.pool.count()
     return { count }
   })
-
-  fastify.post('/pools', async (request, reply) => {
+  
+  fastify.post('/pools', async (request, reply) => { 
     const body = z.object({ title: z.string().trim().min(1) })
-    let title
     try {
-      const data = body.parse(request.body)
-      title = data.title
-    } catch (error) {
+      const { title } = body.parse(request.body)
+      const createCode = new ShortUniqueId({ length: 6 })
+      const code = String(createCode()).toLocaleUpperCase()
+      const pool = await prisma.pool.create({
+        data: { code, title }
+      })
+      return { pool }
+    }catch(error){
       return reply.status(400).send( JSON.parse((error as any).message))
     }
-    const createCode = new ShortUniqueId({ length: 6 })
-    const code = String(createCode()).toLocaleUpperCase()
+  })
+
+
+
+  fastify.post('/pools-signed', async (request, reply) => { 
+    await request.jwtVerify()
+    const body = z.object({ title: z.string().trim().min(1) })
     try {
-      await request.jwtVerify()
+      const { title } = body.parse(request.body) 
+      const createCode = new ShortUniqueId({ length: 6 })
+      const code = String(createCode()).toLocaleUpperCase()
       const pool = await prisma.pool.create({
         data: {
           code, title, ownerId: request.user.sub, participants: {
@@ -30,16 +42,11 @@ export async function poolRoutes(fastify: FastifyInstance) {
               userId: request.user.sub
             }
           }
-        }
-      })
-      return { pool }
-    } catch (err) {
-      const pool = await prisma.pool.create({
-        data: { code, title }
-      })
-      return { pool }
+        }})
+        return { pool }
+    } catch (error) {
+      return reply.status(400).send( JSON.parse((error as any).message))
     }
-    return reply.status(500).send()
   })
 
   fastify.post('/pools/:code/join', async (request, reply) => {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/core/widgets/app_banner.dart';
+import 'package:mobile/modules/poll/my_pools/my_pools_controller.dart';
 import 'package:mobile/repositories/pool_repository.dart';
 
 class CreatePollController extends GetxController {
@@ -17,11 +18,16 @@ class CreatePollController extends GetxController {
       AppBanner.error(subtitle: 'Parece que o nome deste bolão é invalido');
     } else {
       try {
-        final code = await _repo.createPool(title);
+        _loading.value = true;
+        final pool = await _repo.createPool(title);
+        Get.find<MyPoolsController>().pools.add(pool);
+        Get.focusScope?.unfocus();
         this.title.clear();
         AppBanner.success(subtitle: 'Bolão criado com sucesso');
       } catch (error) {
         AppBanner.error(subtitle: 'Não foi possível criar este bolão');
+      } finally {
+        _loading.value = false;
       }
     }
   }

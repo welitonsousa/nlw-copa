@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mobile/modules/poll/create_poll/create_poll_controller.dart';
-import 'package:mobile/modules/poll/find_poll/find_poll_controller.dart';
+import 'package:mobile/modules/poll/my_pools/my_pools_controller.dart';
 import 'package:mobile/repositories/auth_repository.dart';
 import 'package:mobile/repositories/pool_repository.dart';
 import './home_controller.dart';
@@ -12,7 +12,7 @@ class HomeBindings implements Bindings {
     Get.put(PoolRepository());
 
     Get.put(CreatePollController());
-    Get.put(FindPollController());
+    Get.put(MyPoolsController());
     Get.put(HomeController());
   }
 }

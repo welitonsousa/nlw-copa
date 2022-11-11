@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/modules/poll/create_poll/create_poll_page.dart';
-import 'package:mobile/modules/poll/find_poll/find_poll_page.dart';
+import 'package:mobile/modules/poll/my_pools/my_pools_page.dart';
 import './home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -23,7 +23,7 @@ class HomePage extends GetView<HomeController> {
         controller: controller.pageController,
         children: const [
           CreatePollPage(),
-          FindPollPage(),
+          MyPoolsPage(),
         ],
       ),
     );

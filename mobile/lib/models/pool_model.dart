@@ -6,9 +6,9 @@ class PoolModel {
   final String code;
   final String title;
   final DateTime createdAt;
-  final String ownerId;
+  final String? ownerId;
   final List<UserModel> participants;
-  final UserModel owner;
+  final UserModel? owner;
 
   PoolModel({
     required this.count,
@@ -16,22 +16,24 @@ class PoolModel {
     required this.code,
     required this.title,
     required this.createdAt,
-    required this.ownerId,
     required this.participants,
-    required this.owner,
+    this.ownerId,
+    this.owner,
   });
 
   factory PoolModel.fromMap(map) {
     return PoolModel(
-      count: map['_count']['participants']?.toInt() ?? 0,
+      count: map['_count']?['participants']?.toInt() ?? 0,
       id: map['id'] ?? '',
       code: map['code'] ?? '',
       title: map['title'] ?? '',
       createdAt: DateTime.parse(map['createdAt']),
       ownerId: map['ownerId'] ?? '',
-      participants: List<UserModel>.from(
-          map['participants']?.map((x) => UserModel.fromMap(x['user']))),
-      owner: UserModel.fromMap(map['owner']),
+      participants: map['participants'] != null
+          ? List<UserModel>.from(
+              map['participants']?.map((x) => UserModel.fromMap(x['user'])))
+          : [],
+      owner: map['owner'] != null ? UserModel.fromMap(map['owner']) : null,
     );
   }
 }

@@ -12,6 +12,7 @@ class AppTheme {
         centerTitle: true,
         backgroundColor: colors.gray800,
       ),
+      platform: TargetPlatform.iOS,
       dividerTheme: DividerThemeData(
         color: AppTheme.colors.gray600,
         space: 30,

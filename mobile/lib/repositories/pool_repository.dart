@@ -6,10 +6,10 @@ class PoolRepository {
   final _http = Get.find<GetHttpClient>();
 
   /// return the pool code
-  Future<String> createPool(String title) async {
+  Future<PoolModel> createPool(String title) async {
     final response = await _http.post('/pools', body: {"title": title});
     if (response.hasError) throw response.body;
-    return response.body['code'];
+    return PoolModel.fromMap(response.body['pool']);
   }
 
   /// return the list of pools of user sinned
