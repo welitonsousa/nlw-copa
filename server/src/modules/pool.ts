@@ -43,8 +43,10 @@ export async function poolRoutes(fastify: FastifyInstance) {
             }
           }
         }})
+        
         return { pool }
-    } catch (error) {
+      } catch (error) {
+      
       return reply.status(400).send( JSON.parse((error as any).message))
     }
   })
@@ -60,7 +62,7 @@ export async function poolRoutes(fastify: FastifyInstance) {
       }
     })
     if (!pool) return reply.status(404).send({ message: 'pool not found' })
-    else if (pool.participants.length > 0) return reply.status(404).send({ message: 'You already joined this pool' })
+    else if (pool.participants.length > 0) return reply.status(400).send({ message: 'You already joined this pool' })
 
     if (!pool.ownerId) {
       await prisma.pool.update({
@@ -69,12 +71,20 @@ export async function poolRoutes(fastify: FastifyInstance) {
       })
     }
 
-    await prisma.participant.create({
+    const participant = await prisma.participant.create({
       data: {
         poolId: pool.id,
         userId: request.user.sub,
       }
     })
+    return {
+      pool: {
+        ...pool,
+        participants: [...pool.participants, participant],
+        ownerId: pool.ownerId ?? request.user.sub,
+        owner: pool.participants[0] ?? participant,
+      }
+    }
   })
 
   fastify.get('/pools', async (request) => {

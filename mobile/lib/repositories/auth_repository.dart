@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobile/core/router/names.dart';
 
 class AuthRepository {
   final _storage = GetStorage();
@@ -15,21 +18,30 @@ class AuthRepository {
     }
     final user = await google.signIn();
     final auth = await user?.authentication;
+
     final res = await _http.post('/users', body: {
       "access_token": auth?.accessToken,
     });
 
     final token = res.body['token'];
-    setToken();
     await _storage.write('token', token);
     return token;
   }
 
-  setToken<T>() {
-    final token = _storage.read('token');
-    _http.addAuthenticator<T?>((request) async {
+  void setToken<T>() {
+    final token = _storage.read<String?>('token');
+    _http.maxRedirects = 1;
+    _http.sendUserAgent = true;
+    _http.addRequestModifier<T?>((request) {
       request.headers['Authorization'] = "Bearer $token";
       return request;
+    });
+    _http.addResponseModifier((request, response) {
+      if (response.statusCode == 401) {
+        _storage.erase();
+        Get.offAllNamed(NamesRouters.SIGN_IN);
+      }
+      return response;
     });
   }
 }

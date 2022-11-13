@@ -7,7 +7,7 @@ class PoolRepository {
 
   /// return the pool code
   Future<PoolModel> createPool(String title) async {
-    final response = await _http.post('/pools', body: {"title": title});
+    final response = await _http.post('/pools-signed', body: {"title": title});
     if (response.hasError) throw response.body;
     return PoolModel.fromMap(response.body['pool']);
   }
@@ -17,5 +17,12 @@ class PoolRepository {
     final response = await _http.get('/pools');
     if (response.hasError) throw response.body;
     return response.body['pools'].map<PoolModel>(PoolModel.fromMap).toList();
+  }
+
+  /// join in the pool with code
+  Future<PoolModel> join(String code) async {
+    final response = await _http.get('/pools/$code/join');
+    if (response.hasError) throw response.body;
+    return PoolModel.fromMap(response.body['pool']);
   }
 }

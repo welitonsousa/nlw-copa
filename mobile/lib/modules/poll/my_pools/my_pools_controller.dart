@@ -12,8 +12,8 @@ class MyPoolsController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onReady() {
     findPools();
-    super.onInit();
+    super.onReady();
   }
 }

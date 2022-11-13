@@ -9,7 +9,7 @@ class SignInController extends GetxController {
   final AuthRepository _repository;
 
   Future<void> signIn() async {
-    final res = await _repository.signIn();
-    if (res != null) Get.offAndToNamed(NamesRouters.HOME);
+    final token = await _repository.signIn();
+    if (token != null) Get.offAndToNamed(NamesRouters.HOME);
   }
 }
