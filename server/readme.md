@@ -8,7 +8,7 @@
    src="./assets/insomnia.png" height="400"
 />
 
-<a target="_blank" href="./assets/insomnia.json">get the insomnia file</a>
+<a target="_blank" href="./assets/insomnia-file.json">get the insomnia file</a>
 
 
 #### runner server
