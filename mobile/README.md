@@ -4,14 +4,18 @@
    width="300"
 />
 
+<p>
+   <img height="500px"  src="./assets/screenshots/signin.png" />
+   <img height="500px"  src="./assets/screenshots/new_pool.png" />
+   <img height="500px"  src="./assets/screenshots/search_pool.png" />
+</p>
 
+<p>
+   <img height="500px"  src="./assets/screenshots/list_pool.png" />
+   <img height="500px"  src="./assets/screenshots/guesses_pool.png" />
+   <img height="500px"  src="./assets/screenshots/share_pool.png" />
+</p>
 
-<img height="500px"  src="./assets/screenshots/signin.png" />
-<img height="500px"  src="./assets/screenshots/new_pool.png" />
-<img height="500px"  src="./assets/screenshots/search_pool.png" />
-<img height="500px"  src="./assets/screenshots/list_pool.png" />
-<img height="500px"  src="./assets/screenshots/guesses_pool.png" />
-<img height="500px"  src="./assets/screenshots/share_pool.png" />
 
 <br>
 <br>
