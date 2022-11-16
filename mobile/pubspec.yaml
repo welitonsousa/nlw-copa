@@ -11,12 +11,16 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  intl: ^0.17.0
+  country_list: ^0.0.5
   flutter_svg: ^1.1.6
   material_design_icons_flutter: ^5.0.6996
   firebase_core: ^2.1.1
-  firebase_auth: ^4.1.1
   google_sign_in: ^5.4.2
   get_storage: ^2.0.3
+  share_plus: ^6.2.0
+  country_flags: ^1.0.0
+  mask: ^1.0.4
 
 dev_dependencies:
   flutter_test:

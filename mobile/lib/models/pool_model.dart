@@ -6,7 +6,6 @@ class PoolModel {
   final String code;
   final String title;
   final DateTime createdAt;
-  final String? ownerId;
   final List<UserModel> participants;
   final UserModel? owner;
 
@@ -17,7 +16,6 @@ class PoolModel {
     required this.title,
     required this.createdAt,
     required this.participants,
-    this.ownerId,
     this.owner,
   });
 
@@ -28,7 +26,6 @@ class PoolModel {
       code: map['code'] ?? '',
       title: map['title'] ?? '',
       createdAt: DateTime.parse(map['createdAt']),
-      ownerId: map['ownerId'] ?? '',
       participants: map['participants'] != null
           ? List<UserModel>.from(
               map['participants']?.map((x) => UserModel.fromMap(x['user'])))

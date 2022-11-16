@@ -3,4 +3,5 @@ class NamesRouters {
   static const HOME = '/';
   static const SIGN_IN = '/sign-in';
   static const FIND_POOL = '/find-pool';
+  static const POOL_DETAILS = '/pool-details';
 }

@@ -1,16 +1,35 @@
-# mobile
 
-A new Flutter project.
+<img  
+   src="../web/assets/images/nlw-green.png" 
+   width="300"
+/>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<img height="500px"  src="./assets/screenshots/signin.png" />
+<img height="500px"  src="./assets/screenshots/new_pool.png" />
+<img height="500px"  src="./assets/screenshots/search_pool.png" />
+<img height="500px"  src="./assets/screenshots/list_pool.png" />
+<img height="500px"  src="./assets/screenshots/guesses_pool.png" />
+<img height="500px"  src="./assets/screenshots/share_pool.png" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<br>
+<br>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+this is a [Flutter](https://flutter.dev/) project
+
+<b>flutter >= 3.3.4</b>
+
+```js
+flutter pub get
+flutter run --debug
+```
+
+
+<br>
+<br>
+<p align="center">
+   Feito com ❤️ by <a target="_blank" href="https://welitonsousa.github.io"><b>Weliton Sousa</b></a>
+</p>
+
+

@@ -44,7 +44,12 @@ export async function poolRoutes(fastify: FastifyInstance) {
           }
         }})
         
-        return { pool }
+        return { pool, owner: {
+          name: request.user.name,
+          avatar: request.user.avatar,
+          email: request.user.email,
+          id: request.user.sub,
+        } }
       } catch (error) {
       
       return reply.status(400).send( JSON.parse((error as any).message))

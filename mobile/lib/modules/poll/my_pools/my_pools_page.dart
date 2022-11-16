@@ -43,7 +43,13 @@ class MyPoolsPage extends GetView<MyPoolsController> {
         shrinkWrap: true,
         itemCount: controller.pools.length,
         itemBuilder: (context, index) {
-          return PoolItem(pool: controller.pools[index]);
+          return GestureDetector(
+            child: PoolItem(pool: controller.pools[index]),
+            onTap: () => Get.toNamed(
+              NamesRouters.POOL_DETAILS,
+              arguments: controller.pools[index],
+            ),
+          );
         },
       ),
     );
