@@ -8,7 +8,7 @@
    src="./assets/insomnia.png" height="400"
 />
 
-<a target="_blank" href="https://github.com/welitonsousa/nlw-copa/blob/main/server/assets/insomnia.json?raw=true">get the insomnia file</a>
+<a target="_blank" href="./assets/insomnia.json">get the insomnia file</a>
 
 
 #### runner server
